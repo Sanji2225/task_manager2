@@ -1,0 +1,25 @@
+{% extends "tasks/baseFile.html" %}
+{% load bootstrap3 %}
+
+
+
+{% block header %}
+    <h3>Tarefa: {{ task.title }}</h3>
+{% endblock header %}
+
+{% block content %}
+
+    <p> Descrição da Tarefa: {{ task.description }}</p>
+    <p> Completa:{% if task.completed %} Sim
+    {% else %}
+        Não
+    {% endif %}</p>
+    <p>Criada em: {{ task.created_at | date:'d/m/Y' }}</p>
+    <p>Prazo: {{ task.due_date | date:'d/m/Y' }}</p>
+    <p> Criada por: {{ task.user }}</p>
+    {% buttons %}
+    <a class="btn btn-primary btn-lg" href="{% url 'edit_task' task.id %}">Editar Tarefa</a>  -
+    <a class="btn btn-danger btn-lg" href="{% url 'confirmDelete_task' task.id %}">Excluir Tarefa</a>
+    {% endbuttons %}
+
+{% endblock content %}

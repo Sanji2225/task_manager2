@@ -1,0 +1,60 @@
+{% extends "tasks/baseFile.html" %}
+
+{% block header %}
+    {% if user.is_authenticated %}
+        <div class="container text-center">
+            <div class="row">
+                <div class="col-md-6 col-md-offset-3">
+                    <h1>
+                        Bem-vindo ao Task Manager, {{ user.username }}
+                    </h1>
+                </div>
+            </div>
+        </div>
+
+    {% else %}
+        <div class="container text-center">
+            <div class="row">
+                <div class="col-md-6 col-md-offset-3">
+                    <h1>
+                        Bem-vindo ao Task Manager
+                    </h1>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
+{% endblock header %}
+
+{% block content %}
+    {% if user.is_authenticated %}
+        <div class="container text-center">
+            <div class="row">
+                <div class="col-md-6 col-md-offset-3">
+                    <div class="example">
+                        <h2>É um prazer te ter de volta!</h2>
+                        <p><a class="btn btn-primary btn-lg" href="{% url 'tasks' %}" role="button">Suas Tarefas</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% else %}
+        <div class="container text-center">
+            <div class="row">
+                <div class="col-md-6 col-md-offset-3">
+                    <div class="example">
+                        <h3>
+                            <a href="{% url 'register' %}">Crie sua conta</a>
+                            ou
+                            <a href="{% url 'login' %}">entre</a>
+                            para aproveitar o app.
+                        </h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    {% endif %}
+{% endblock %}

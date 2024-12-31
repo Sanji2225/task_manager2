@@ -1,0 +1,96 @@
+{% load bootstrap3 %}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta name="keywords" content="python manage.py createsuperuser, mupi, taskmanager, systems">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="x-ua-compatible" content="IE=edge">
+    <title>Task Manager</title>
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+</head>
+<body>
+<nav class="navbar navbar-default navbar-static-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button"
+                    class="navbar-toggle collapsed"
+                    data-toggle="collapse"
+                    data-target="#navbar"
+                    aria-expanded="false">
+
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="{% url 'index' %}"> Task Manager </a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="navbar">
+
+
+            {% if user.is_authenticated %}
+                <ul class="nav navbar-nav">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                           aria-expanded="false">
+                            Tarefas <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="{% url 'tasks' %}">Listar Tarefas</a></li>
+                            <li><a class="dropdown-item" href="{% url 'novaTask' %}">Nova Tarefa</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
+                           aria-expanded="false">
+                            Ola, {{ user.username }} <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item" href="{% url 'logout' %}">Sair</a></li>
+                        </ul>
+                    </li>
+
+                </ul>
+
+            {% else %}
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
+                           aria-expanded="false">
+                            Conta
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li class="dropdown-item">
+                                <a class="nav-link" href="{% url 'login' %}">Fazer Login</a>
+                            </li>
+                            <li class="dropdown-item">
+                                <a class="nav-link" href="{% url 'register' %}">Criar Conta</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            {% endif %}
+
+        </div>
+    </div>
+</nav>
+</body>
+<div class="container">
+    <div>
+        {% block header %}{% endblock header %}
+    </div>
+    <div>
+        {% block content %}{% endblock content %}
+    </div>
+</div>
+
+</html>
+
